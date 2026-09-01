@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import mosquitoScreens from "@/assets/images/mosquito-screens.webp";
+import rollerBlinds from "@/assets/images/roller-blinds.webp";
+import rollerShutters from "@/assets/images/roller-shutters.webp";
+import venetianBlinds from "@/assets/images/venetian-blinds.webp";
+
+const services = [
+  {
+    title: "KOMARNIKI",
+    copy: "Rolo, fiksni, plise in drsni modeli za okna ali vrata.",
+    image: mosquitoScreens,
+    alt: "Nočni metulj na mreži komarnika",
+  },
+  {
+    title: "ZUNANJE IN NOTRANJE ŽALUZIJE",
+    copy: "Zunanje krpanke in notranje žaluzije za nadzor svetlobe in zasebnosti.",
+    image: venetianBlinds,
+    alt: "Zunanje žaluzije na stekleni fasadi sodobne hiše",
+  },
+  {
+    title: "ROLOJI",
+    copy: "Notranji roloji in rolo zavese, od prosojnih do zatemnitvenih izvedb.",
+    image: rollerBlinds,
+    alt: "Rolo dan-noč na kuhinjskem oknu",
+  },
+  {
+    title: "ROLETE",
+    copy: "Predokenske in podometne izvedbe za več zasebnosti, zaščite in toplotne izolacije.",
+    image: rollerShutters,
+    alt: "Spuščene zunanje rolete na oknih sodobne hiše",
+  },
+];
+---
+
+<section class="bg-orange px-5 md:px-12 xl:px-16 py-20 md:py-24" id="zakaj">
+  <div class="mx-auto max-w-7xl">
+    <header class="mb-14 grid lg:grid-cols-2 items-end gap-12 lg:gap-20">
+      <h2
+        class="font-display text-5xl xl:text-6xl font-black leading-none tracking-tight text-charcoal"
+      >
+        POPRAVIMO.<br />VGRADIMO.
+      </h2>
+      <p class="max-w-2xl leading-relaxed text-charcoal">
+        Senčila servisiramo, popravimo in nastavimo, dotrajane ali poškodovane
+        dele pa zamenjamo. Nova senčila natančno vgradimo in vam svetujemo pri
+        izbiri rešitve za vaš prostor.
+      </p>
+    </header>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      {
+        services.map(({ title, copy, image, alt }) => (
+          <article class="relative flex min-h-96 lg:min-h-108 min-w-0 flex-col justify-end overflow-hidden p-6 xl:p-8">
+            <Image
+              class="absolute inset-0 size-full object-cover brightness-85 saturate-90"
+              src={image}
+              alt={alt}
+              loading="eager"
+              widths={[320, 480, 640, 800]}
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            />
+            <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
+            <h3 class="z-10 mb-4 text-2xl lg:text-xl xl:text-2xl font-black leading-none text-white">
+              {title}
+            </h3>
+            <p class="z-10 leading-relaxed text-white">{copy}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

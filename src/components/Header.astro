@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import { Mail, Phone } from "@lucide/astro";
+import logo from "@/assets/images/logo.svg";
+import {
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_LINK,
+  CONTACT_PHONE,
+  CONTACT_PHONE_LINK,
+  SITE_TITLE,
+} from "@/const/names";
+---
+
+<header
+  class="sticky top-0 z-50 h-16 md:h-18 border-b border-black/10 bg-cream/80 px-5 md:px-12 xl:px-16 backdrop-blur-2xl"
+>
+  <div class="mx-auto flex h-full max-w-7xl items-center justify-between">
+    <a
+      class="flex items-center gap-3 text-xl font-black tracking-tight"
+      href="#hero"
+    >
+      <Image src={logo} width={40} height={40} format="svg" alt="" priority />
+      {SITE_TITLE}
+    </a>
+
+    <div class="hidden lg:flex items-center gap-6">
+      <a
+        class="py-2 font-mono text-sm font-bold underline-offset-4 hover:underline"
+        href={CONTACT_PHONE_LINK}>{CONTACT_PHONE}</a
+      >
+      <a
+        class="py-2 font-mono text-sm font-bold underline-offset-4 hover:underline"
+        href={CONTACT_EMAIL_LINK}>{CONTACT_EMAIL}</a
+      >
+    </div>
+
+    <nav class="flex sm:hidden gap-1" aria-label="Kontakt">
+      <a
+        class="grid size-10 place-items-center"
+        href={CONTACT_PHONE_LINK}
+        aria-label={`Pokličite ${CONTACT_PHONE}`}
+      >
+        <Phone class="size-5" />
+      </a>
+      <a
+        class="grid size-10 place-items-center"
+        href={CONTACT_EMAIL_LINK}
+        aria-label={`Pišite na ${CONTACT_EMAIL}`}
+      >
+        <Mail class="size-5" />
+      </a>
+    </nav>
+
+    <nav class="hidden sm:flex items-center gap-6" aria-label="Glavna navigacija">
+      <a class="py-2 font-mono text-sm font-bold" href="#zakaj">STORITVE</a>
+      <a class="py-2 font-mono text-sm font-bold" href="#kako">POTEK</a>
+      <a
+        class="border border-current px-3 py-2 font-mono text-sm font-bold"
+        href="#kontakt">KONTAKT</a
+      >
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "@lucide/astro";
+import heroBackground from "@/assets/images/hero-background.webp";
+---
+
+<section
+  id="hero"
+  class="relative h-120 md:h-136 xl:h-144 overflow-hidden bg-brand"
+>
+  <Image
+    class="absolute inset-0 size-full object-cover opacity-90 brightness-85 contrast-125 grayscale"
+    src={heroBackground}
+    alt=""
+    widths={[640, 960, 1280, 1920, 2400]}
+    sizes="100vw"
+    priority
+  />
+  <div class="absolute inset-0 bg-linear-to-b from-black/10 to-black/50"></div>
+
+  <h1
+    class="absolute inset-x-5 md:inset-x-12 xl:inset-x-16 top-20 mx-auto max-w-7xl text-8xl sm:text-9xl font-bold leading-none tracking-tighter text-cream drop-shadow-hard"
+  >
+    <span class="sr-only">Senčila </span>Cuder
+  </h1>
+
+  <div
+    class="absolute inset-x-5 md:inset-x-12 xl:inset-x-16 bottom-6 mx-auto grid max-w-7xl grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 items-end gap-3"
+  >
+    <div class="col-span-3 sm:col-span-2 -rotate-1">
+      <p
+        class="mb-3 w-max max-w-full bg-cream px-4 py-3 lg:text-xl xl:text-2xl font-black leading-none text-ink drop-shadow-hard"
+      >
+        SERVIS IN MONTAŽA SENČIL.
+      </p>
+      <p
+        class="ml-3 w-max max-w-full bg-charcoal px-4 py-3 lg:text-xl xl:text-2xl font-black leading-none text-white drop-shadow-hard"
+      >
+        KOMARNIKI. ŽALUZIJE. ROLOJI.
+      </p>
+    </div>
+
+    <div class="flex h-27 items-center bg-cream p-3 lg:p-4 drop-shadow-hard">
+      <strong class="text-sm sm:text-lg leading-none text-ink">
+        UDOBJE.<br />ZASEBNOST.<br />ZAŠČITA.
+      </strong>
+    </div>
+
+    <a
+      class="relative col-span-2 sm:col-span-1 flex h-27 items-center bg-orange p-4 text-xl xl:text-2xl font-black leading-none text-white drop-shadow-hard"
+      href="#kontakt"
+    >
+      POŠLJITE POVPRAŠEVANJE
+      <ArrowUpRight class="absolute top-4 right-4 size-6" />
+    </a>
+  </div>
+</section>

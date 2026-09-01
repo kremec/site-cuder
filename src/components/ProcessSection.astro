@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import { ChevronDown } from "@lucide/astro";
+import stepOne from "@/assets/images/step-1.webp";
+import stepTwo from "@/assets/images/step-2.webp";
+import stepThree from "@/assets/images/step-3.webp";
+
+const steps = [
+  {
+    title: "KONTAKT",
+    copy: "Pokličite ali pišite ter na kratko opišite težavo ali želeno senčilo.",
+    image: stepOne,
+    alt: "Monter s telefonom in pasom za orodje",
+  },
+  {
+    title: "PREGLED",
+    copy: "Preverimo stanje, opravimo izmero in predlagamo ustrezno rešitev.",
+    image: stepTwo,
+    alt: "Merjenje širine okenskega okvirja",
+  },
+  {
+    title: "IZVEDBA",
+    copy: "Senčilo popravimo ali vgradimo ter preverimo njegovo delovanje.",
+    image: stepThree,
+    alt: "Vrtanje v okenski okvir pri montaži",
+  },
+];
+---
+
+<section class="bg-charcoal px-5 md:px-12 xl:px-16 py-20 md:py-24" id="kako">
+  <div
+    class="mx-auto grid lg:grid-cols-2 max-w-7xl gap-12 lg:gap-20 lg:items-center"
+  >
+    <header>
+      <h2
+        class="font-display text-5xl max-sm:text-3xl xl:text-6xl font-black leading-none tracking-tight whitespace-nowrap text-cream"
+      >
+        HITRO DO REŠITVE.
+      </h2>
+      <p class="mt-6 max-w-md leading-relaxed text-cream">
+        Smo novo ustanovljeno podjetje, ki združuje dolgoletne izkušnje,
+        strokovno znanje in preverjene kompetence.
+      </p>
+    </header>
+
+    <div class="border-t border-white/25">
+      {
+        steps.map(({ title, copy, image, alt }, index) => (
+          <details
+            class="group border-b border-white/25"
+            name="steps"
+            open={index === 0}
+          >
+            <summary class="relative z-10 flex cursor-pointer list-none items-center gap-3 py-4 focus-visible:-outline-offset-4 focus-visible:outline-white">
+              <b class="w-12 md:w-16 shrink-0 text-lg text-orange">
+                0{index + 1}
+              </b>
+              <h3 class="flex-1 font-bold text-cream">{title}</h3>
+              <ChevronDown
+                class="text-orange size-6 transition-transform group-open:rotate-180"
+              />
+            </summary>
+            <div class="relative aspect-video overflow-hidden">
+              <Image
+                class="size-full object-cover"
+                src={image}
+                alt={alt}
+                widths={[640, 960, 1280]}
+                sizes="(min-width: 1024px) 60vw, 100vw"
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
+              <p class="absolute bottom-0 max-w-xl p-6 md:text-lg leading-relaxed text-cream">
+                {copy}
+              </p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

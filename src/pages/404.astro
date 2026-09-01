@@ -1,0 +1,14 @@
+---
+import { SITE_TITLE } from "@/const/names";
+import Page from "@/layouts/Page.astro";
+---
+
+<Page title={`Stran ne obstaja | ${SITE_TITLE}`} noindex>
+  <main id="main-content" class="grid min-h-screen place-items-center px-5 text-center">
+    <section>
+      <h1 class="text-6xl font-black">404</h1>
+      <p class="mt-4">Ta stran ne obstaja.</p>
+      <a class="mt-8 inline-block py-2 underline" href="/">Nazaj na naslovnico</a>
+    </section>
+  </main>
+</Page>

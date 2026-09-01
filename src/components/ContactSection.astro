@@ -1,0 +1,145 @@
+---
+import {
+  MapPin,
+  MessageCircleQuestionMark,
+  Phone,
+  UserRound,
+} from "@lucide/astro";
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_LINK,
+  CONTACT_PHONE,
+  CONTACT_PHONE_LINK,
+} from "@/const/names";
+---
+
+<section class="px-5 md:px-12 xl:px-16 py-20 md:py-24" id="kontakt">
+  <div class="mx-auto grid lg:grid-cols-2 max-w-7xl gap-12 lg:gap-20">
+    <div class="flex flex-col">
+      <h2
+        class="font-display text-5xl xl:text-6xl font-black leading-none tracking-tight"
+      >
+        POTREBUJETE SERVIS ALI MONTAŽO SENČIL?
+      </h2>
+      <p class="mt-6 max-w-xl leading-relaxed">
+        Kontaktirajte nas in dogovorili se bomo za ogled ter rešitev, ki najbolj
+        ustreza vašemu prostoru.
+      </p>
+
+      <dl class="mt-12 lg:mt-auto lg:pt-12 max-w-xl">
+        <div class="border-ink/30 flex gap-8 border-b py-4">
+          <dt class="w-28 shrink-0">TELEFON</dt>
+          <dd class="font-bold">
+            <a
+              class="underline underline-offset-4"
+              href={CONTACT_PHONE_LINK}>{CONTACT_PHONE}</a
+            >
+          </dd>
+        </div>
+        <div class="border-ink/30 flex gap-8 border-b py-4">
+          <dt class="w-28 shrink-0">E-POŠTA</dt>
+          <dd>
+            <a
+              class="underline underline-offset-4"
+              href={CONTACT_EMAIL_LINK}>{CONTACT_EMAIL}</a
+            >
+          </dd>
+        </div>
+        <div class="border-ink/30 flex gap-8 border-b py-4">
+          <dt class="w-28 shrink-0">NASLOV</dt>
+          <dd><address class="not-italic">{CONTACT_ADDRESS}</address></dd>
+        </div>
+        <div class="border-ink/30 flex gap-8 border-b py-4">
+          <dt class="w-28 shrink-0">DOSEGLJIVOST</dt>
+          <dd class="grid flex-1 grid-cols-2 gap-x-5">
+            <span>Pon. - pet.</span><span>7:00 - 19:00</span>
+            <span>Sob.</span><span>8:00 - 12:00</span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <form
+      class="border-ink grid border-t border-l"
+      aria-label="Kontaktni obrazec"
+      data-contact-form
+      data-email={CONTACT_EMAIL}
+    >
+      <label
+        class="border-ink flex items-center gap-4 border-r border-b p-5 focus-within:bg-white/25"
+      >
+        <UserRound class="size-5 shrink-0" />
+        <span class="sr-only">Ime in priimek</span>
+        <input
+          type="text"
+          class="placeholder:text-ink/65 min-w-0 flex-1 text-sm font-bold"
+          name="name"
+          autocomplete="name"
+          placeholder="IME IN PRIIMEK"
+          required
+        />
+      </label>
+      <label
+        class="border-ink flex items-center gap-4 border-r border-b p-5 focus-within:bg-white/25"
+      >
+        <Phone class="size-5 shrink-0" />
+        <span class="sr-only">Telefon ali e-pošta</span>
+        <input
+          type="text"
+          class="placeholder:text-ink/65 min-w-0 flex-1 text-sm font-bold"
+          name="contact"
+          placeholder="TELEFON ALI E-POŠTA"
+          required
+        />
+      </label>
+      <label
+        class="border-ink flex items-center gap-4 border-r border-b p-5 focus-within:bg-white/25"
+      >
+        <MapPin class="size-5 shrink-0" />
+        <span class="sr-only">Lokacija objekta</span>
+        <input
+          type="text"
+          class="placeholder:text-ink/65 min-w-0 flex-1 text-sm font-bold"
+          name="location"
+          placeholder="LOKACIJA OBJEKTA"
+        />
+      </label>
+      <label
+        class="border-ink flex items-start gap-4 border-r border-b p-5 focus-within:bg-white/25"
+      >
+        <MessageCircleQuestionMark class="size-5 shrink-0" />
+        <span class="sr-only">Kaj potrebujete?</span>
+        <textarea
+          class="placeholder:text-ink/65 min-h-28 min-w-0 flex-1 text-sm font-bold"
+          name="message"
+          placeholder="OPIŠITE TEŽAVO ALI ŽELENO SENČILO"
+          required></textarea>
+      </label>
+      <button
+        class="min-h-16 bg-orange text-xl xl:text-2xl font-black text-white focus-visible:outline-ink"
+        type="submit"
+      >
+        ODPRI E-POŠTO
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]")!;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const body = [
+      `Ime: ${data.get("name")}`,
+      `Kontakt: ${data.get("contact")}`,
+      `Lokacija: ${data.get("location")}`,
+      `Povpraševanje: ${data.get("message")}`,
+    ].join("\n");
+
+    window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent("Povpraševanje s spletne strani")}&body=${encodeURIComponent(body)}`;
+  });
+</script>
