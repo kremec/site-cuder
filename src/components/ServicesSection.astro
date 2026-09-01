@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import mosquitoScreens from "@/assets/images/mosquito-screens.webp";
 import rollerBlinds from "@/assets/images/roller-blinds.webp";
 import rollerShutters from "@/assets/images/roller-shutters.webp";
@@ -52,13 +52,16 @@ const services = [
       {
         services.map(({ title, copy, image, alt }) => (
           <article class="relative flex min-h-96 lg:min-h-108 min-w-0 flex-col justify-end overflow-hidden p-6 xl:p-8">
-            <Image
+            <Picture
               class="absolute inset-0 size-full object-cover brightness-85 saturate-90"
               src={image}
               alt={alt}
-              loading="eager"
-              widths={[320, 480, 640, 800]}
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              loading="lazy"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+              formats={["avif"]}
+              fallbackFormat="webp"
+              quality={45}
             />
             <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
             <h3 class="z-10 mb-4 text-2xl lg:text-xl xl:text-2xl font-black leading-none text-white">

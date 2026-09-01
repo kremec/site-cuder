@@ -56,17 +56,15 @@ const steps = [
                 0{index + 1}
               </b>
               <h3 class="flex-1 font-bold text-cream">{title}</h3>
-              <ChevronDown
-                class="text-orange size-6 transition-transform group-open:rotate-180"
-              />
+              <ChevronDown class="text-orange size-6 transition-transform group-open:rotate-180" />
             </summary>
             <div class="relative aspect-video overflow-hidden">
               <Image
                 class="size-full object-cover"
                 src={image}
                 alt={alt}
-                widths={[640, 960, 1280]}
-                sizes="(min-width: 1024px) 60vw, 100vw"
+                widths={[480, 640, 768, 960, 1280]}
+                sizes="(min-width: 1408px) 604px, (min-width: 1024px) calc(50vw - 5rem), calc(100vw - 2.5rem)"
               />
               <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
               <p class="absolute bottom-0 max-w-xl p-6 md:text-lg leading-relaxed text-cream">
