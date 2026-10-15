@@ -63,8 +63,9 @@ import {
     <form
       class="border-ink grid border-t border-l"
       aria-label="Kontaktni obrazec"
+      action="/api/contact"
+      method="post"
       data-contact-form
-      data-email={CONTACT_EMAIL}
     >
       <label
         class="border-ink flex items-center gap-4 border-r border-b p-5 focus-within:bg-white/25"
@@ -77,6 +78,7 @@ import {
           name="name"
           autocomplete="name"
           placeholder="IME IN PRIIMEK"
+          maxlength="100"
           required
         />
       </label>
@@ -89,7 +91,9 @@ import {
           type="text"
           class="placeholder:text-ink/65 min-w-0 flex-1 text-sm font-bold focus:outline-none!"
           name="contact"
+          autocomplete="on"
           placeholder="TELEFON ALI E-POŠTA"
+          maxlength="200"
           required
         />
       </label>
@@ -103,6 +107,7 @@ import {
           class="placeholder:text-ink/65 min-w-0 flex-1 text-sm font-bold focus:outline-none!"
           name="location"
           placeholder="LOKACIJA OBJEKTA"
+          maxlength="200"
         />
       </label>
       <label
@@ -114,32 +119,64 @@ import {
           class="placeholder:text-ink/65 min-h-28 min-w-0 flex-1 text-sm font-bold focus:outline-none!"
           name="message"
           placeholder="OPIŠITE TEŽAVO ALI ŽELENO SENČILO"
+          maxlength="4000"
           required></textarea>
       </label>
       <button
-        class="min-h-16 bg-orange text-xl xl:text-2xl font-black text-white focus-visible:outline-ink"
+        class="min-h-16 cursor-pointer bg-orange text-xl xl:text-2xl font-black text-white focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-60"
         type="submit"
+        disabled
       >
-        ODPRI E-POŠTO
+        POŠLJI POVPRAŠEVANJE
       </button>
     </form>
   </div>
 </section>
 
 <script>
+  import { showToast } from "./toast";
+
+  declare const posthog: { capture: (event: string) => void };
+
   const form = document.querySelector<HTMLFormElement>("[data-contact-form]")!;
+  const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+  button.disabled = false;
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (button.disabled) return;
 
-    const data = new FormData(form);
-    const body = [
-      `Ime: ${data.get("name")}`,
-      `Kontakt: ${data.get("contact")}`,
-      `Lokacija: ${data.get("location")}`,
-      `Povpraševanje: ${data.get("message")}`,
-    ].join("\n");
+    button.disabled = true;
+    button.textContent = "POŠILJANJE ...";
+    form.setAttribute("aria-busy", "true");
 
-    window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent("Povpraševanje s spletne strani")}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (response.status !== 204) throw new Error("Send failed");
+
+      form.reset();
+      showToast({
+        variant: "success",
+        title: "Povpraševanje poslano",
+        description: "Hvala za vaše sporočilo.",
+      });
+    } catch {
+      showToast({
+        variant: "error",
+        title: "Pošiljanje ni uspelo",
+        description: "Poskusite znova ali nas pokličite.",
+      });
+      return;
+    } finally {
+      button.disabled = false;
+      button.textContent = "POŠLJI POVPRAŠEVANJE";
+      form.removeAttribute("aria-busy");
+    }
+
+    if (typeof posthog !== "undefined") posthog.capture("inquiry_submitted");
   });
 </script>

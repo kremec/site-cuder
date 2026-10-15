@@ -7,7 +7,7 @@
   },
   "scripts": {
     "check": "astro check",
-    "dev": "astro dev",
+    "dev": "wrangler dev --local --live-reload",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
