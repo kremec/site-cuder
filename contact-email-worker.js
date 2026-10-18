@@ -47,7 +47,7 @@ export default {
     }
 
     try {
-      await env.CONTACT_EMAIL.send({
+      await env.CONTACT_INQUIRIES.send({
         from: "info@sencila-cuder.com",
         to: "info@sencila-cuder.com",
         replyTo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
@@ -62,9 +62,16 @@ export default {
         ].join("\n"),
       });
     } catch {
-      return new Response(null, { status: 502 });
+      return new Response(null, { status: 503 });
     }
 
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 202 });
+  },
+
+  async queue(batch, env) {
+    for (const message of batch.messages) {
+      await env.CONTACT_EMAIL.send(message.body);
+      message.ack();
+    }
   },
 };

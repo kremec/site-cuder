@@ -24,4 +24,22 @@
       "destination_address": "info@sencila-cuder.com",
     },
   ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "CONTACT_INQUIRIES",
+        "queue": "site-cuder-contact-emails",
+      },
+    ],
+    "consumers": [
+      {
+        "queue": "site-cuder-contact-emails",
+        "max_batch_size": 1,
+        "max_batch_timeout": 0,
+        "max_retries": 3,
+        "retry_delay": 60,
+        "dead_letter_queue": "site-cuder-contact-emails-failed",
+      },
+    ],
+  },
 }

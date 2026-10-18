@@ -156,12 +156,12 @@ import {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
-      if (response.status !== 204) throw new Error("Send failed");
+      if (response.status !== 202) throw new Error("Send failed");
 
       form.reset();
       showToast({
         variant: "success",
-        title: "Povpraševanje poslano",
+        title: "Povpraševanje prejeto",
         description: "Hvala za vaše sporočilo.",
       });
     } catch {
