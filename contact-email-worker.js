@@ -48,7 +48,7 @@ export default {
 
     try {
       await env.CONTACT_EMAIL.send({
-        from: "obrazec@sencila-cuder.com",
+        from: "info@sencila-cuder.com",
         to: "info@sencila-cuder.com",
         replyTo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
           ? contact
