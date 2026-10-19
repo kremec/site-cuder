@@ -1,5 +1,18 @@
 # Astro Starter Kit: Minimal
 
+## Shareable previews
+
+Cloudflare Workers Builds deploys pushes to feature branches as Worker Previews.
+The stable `workers.dev` URL updates on each push and appears in the Cloudflare
+Worker's **Previews** tab and on the GitHub pull request. Only `develop` deploys
+to the production website.
+
+To deploy the current branch manually after `bunx wrangler login`, run
+`bunx wrangler preview`.
+
+Previews intentionally omit production email and queue bindings. The pages work,
+but submitting the contact form returns an error and does not send an email.
+
 ```sh
 bun create astro@latest -- --template minimal
 ```
