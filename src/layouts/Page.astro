@@ -1,6 +1,12 @@
 ---
 import logo from "@/assets/images/logo.svg";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/const/names";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_LINK,
+  CONTACT_POSTAL_ADDRESS,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from "@/const/names";
 import "@/styles/global.css";
 import PostHog from "@/util/PostHog.astro";
 
@@ -15,6 +21,25 @@ const canonicalURL = Astro.site
   : Astro.url;
 
 const socialImageURL = new URL("/social.png", canonicalURL);
+const business = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": new URL("/#business", canonicalURL).href,
+  name: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  url: new URL("/", canonicalURL).href,
+  logo: new URL(logo.src, canonicalURL).href,
+  telephone: CONTACT_PHONE_LINK.slice(4),
+  email: CONTACT_EMAIL,
+  address: {
+    "@type": "PostalAddress",
+    ...CONTACT_POSTAL_ADDRESS,
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Slovenija",
+  },
+};
 ---
 
 <!doctype html>
@@ -38,6 +63,11 @@ const socialImageURL = new URL("/social.png", canonicalURL);
     <title>{title}</title>
     <meta name="description" content={SITE_DESCRIPTION} />
     {noindex && <meta name="robots" content="noindex" />}
+    {
+      !noindex && (
+        <script type="application/ld+json" set:html={JSON.stringify(business)} />
+      )
+    }
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_TITLE} />
