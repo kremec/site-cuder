@@ -1,0 +1,188 @@
+---
+import { Picture } from "astro:assets";
+import { ArrowLeft, ArrowUpRight, ChevronDown } from "@lucide/astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/const/names";
+import type { Product } from "@/const/products";
+import Page from "@/layouts/Page.astro";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const photoCredits = product.variants.flatMap((variant) =>
+  "credit" in variant && variant.credit ? [variant.credit] : [],
+);
+---
+
+<Page
+  title={`${product.title} | ${SITE_TITLE}`}
+  description={product.description}
+>
+  <Header />
+  <main id="main-content">
+    <section class="px-5 md:px-12 xl:px-16 py-12 md:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid lg:grid-cols-2 items-center gap-10 lg:gap-20">
+          <div>
+            <a
+              class="mb-6 inline-flex min-h-11 items-center gap-3 font-mono text-sm font-bold underline-offset-4 hover:underline"
+              href="/#zakaj"
+              aria-label="Nazaj na storitve"
+            >
+              <ArrowLeft class="size-5" />
+              STORITVE
+            </a>
+            <h1
+              class="font-display text-4xl sm:text-5xl xl:text-6xl font-black leading-none tracking-tight uppercase"
+            >
+              {product.title}
+            </h1>
+            <p class="mt-6 max-w-xl leading-relaxed">{product.copy}</p>
+            <a
+              class="mt-8 inline-flex items-center gap-4 bg-orange px-5 py-4 font-bold text-white"
+              href="/#kontakt"
+            >
+              POŠLJITE POVPRAŠEVANJE
+              <ArrowUpRight class="size-5 shrink-0" />
+            </a>
+          </div>
+          <figure>
+            <Picture
+              class="aspect-4/3 w-full object-cover"
+              src={product.image}
+              alt={product.alt}
+              widths={[480, 640, 960, 1280]}
+              sizes="(min-width: 1408px) 600px, (min-width: 1024px) calc(50vw - 5rem), calc(100vw - 2.5rem)"
+              formats={["avif"]}
+              fallbackFormat="webp"
+              quality={60}
+              priority
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="bg-orange px-5 md:px-12 xl:px-16 py-16 md:py-20 text-charcoal"
+    >
+      <div class="mx-auto max-w-7xl">
+        <header class="mb-10 grid lg:grid-cols-2 gap-6 lg:gap-20">
+          <h2
+            class="font-display text-4xl md:text-5xl font-black leading-none tracking-tight"
+          >
+            {product.variantsTitle}
+          </h2>
+          <p class="max-w-xl leading-relaxed">{product.variantsIntro}</p>
+        </header>
+        <div class="grid gap-5 sm:grid-cols-2">
+          {
+            product.variants.map((variant) => (
+              <figure class="relative flex min-h-72 flex-col justify-end overflow-hidden p-5 md:p-8 lg:aspect-4/3">
+                <Picture
+                  class="absolute inset-0 size-full object-cover saturate-90"
+                  src={variant.image}
+                  alt={variant.alt}
+                  widths={[320, 480, 640, 960]}
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  formats={["avif"]}
+                  fallbackFormat="webp"
+                  quality={60}
+                  loading="lazy"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent"
+                  aria-hidden="true"
+                />
+                <figcaption class="relative max-w-prose text-white">
+                  <h3 class="text-2xl font-black leading-tight uppercase">
+                    {variant.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed sm:text-base">
+                    {variant.copy}
+                  </p>
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="px-5 md:px-12 xl:px-16 pb-16 md:pb-20">
+      <div
+        class="mx-auto grid lg:grid-cols-2 lg:items-center max-w-7xl gap-10 lg:gap-20 border-t border-ink/30 pt-12 md:pt-16"
+      >
+        <header>
+          <h2
+            class="font-display text-4xl md:text-5xl font-black leading-none tracking-tight"
+          >
+            POGOSTA<br />VPRAŠANJA.
+          </h2>
+        </header>
+        <div class="border-t border-ink/30">
+          {
+            product.faqs.map(({ id, question, answer }, index) => (
+              <details
+                class="group border-b border-ink/30"
+                id={id}
+                name="faq"
+                open={index === 0}
+              >
+                <summary class="flex cursor-pointer list-none items-center gap-5 py-5 focus-visible:-outline-offset-4">
+                  <h3 class="flex-1 font-bold">{question}</h3>
+                  <ChevronDown class="size-5 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" />
+                </summary>
+                <p class="pb-6 leading-relaxed">{answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer>
+    {
+      photoCredits.length > 0 && (
+        <details class="mx-auto max-w-7xl pb-5 text-xs leading-relaxed text-ink/70">
+          <summary class="w-fit cursor-pointer py-2">
+            Avtorji fotografij
+          </summary>
+          <ul class="mt-2 space-y-2">
+            {photoCredits.map((credit) => (
+              <li>
+                <a class="underline underline-offset-2" href={credit.href}>
+                  {credit.title}, {credit.author}
+                </a>
+                ,{" "}
+                <a
+                  class="underline underline-offset-2"
+                  href={credit.licenseHref}
+                >
+                  {credit.license}
+                </a>
+                . {credit.changes}
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+  </Footer>
+</Page>
+
+<script>
+  function openLinkedFaq() {
+    const faq = document.getElementById(window.location.hash.slice(1));
+    if (!(faq instanceof HTMLDetailsElement) || faq.name !== "faq") return;
+
+    faq.open = true;
+    faq.scrollIntoView();
+  }
+
+  openLinkedFaq();
+  window.addEventListener("hashchange", openLinkedFaq);
+</script>
