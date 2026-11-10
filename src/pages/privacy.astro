@@ -1,0 +1,195 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_LINK,
+  SITE_TITLE,
+} from "@/const/names";
+import Page from "@/layouts/Page.astro";
+---
+
+<Page title={`Politika zasebnosti | ${SITE_TITLE}`}>
+  <Header />
+  <main id="main-content" class="px-5 py-12 md:px-12 md:py-20 xl:px-16">
+    <article class="mx-auto max-w-3xl space-y-10 leading-relaxed">
+      <header class="space-y-6 border-b border-ink/20 pb-10">
+        <a
+          class="inline-flex min-h-11 items-center gap-3 font-mono text-sm font-bold underline-offset-4 hover:underline"
+          href="/"
+        >
+          <ArrowLeft class="size-5" />
+          NASLOVNICA
+        </a>
+        <h1
+          class="font-display text-4xl sm:text-5xl xl:text-6xl font-black leading-none tracking-tight uppercase"
+        >
+          POLITIKA ZASEBNOSTI
+        </h1>
+        <p class="text-sm">
+          Zadnja posodobitev: <time datetime="2026-11-10"
+            >10. november 2026</time
+          >
+        </p>
+      </header>
+
+      <section class="space-y-4" aria-labelledby="upravljavec">
+        <h2 id="upravljavec" class="font-display text-2xl font-black">
+          Kdo obdeluje podatke
+        </h2>
+        <p>
+          Upravljavec je <strong>Senčila Cuder, Andrej Cuder s.p.</strong>,{" "}
+          {CONTACT_ADDRESS}, Slovenija. Za vprašanja o podatkih in uveljavljanje
+          pravic nam pišite na <a href={CONTACT_EMAIL_LINK}>{CONTACT_EMAIL}</a>.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="povprasevanja">
+        <h2 id="povprasevanja" class="font-display text-2xl font-black">
+          Kontaktni obrazec
+        </h2>
+        <p>
+          Ob oddaji povpraševanja prejmemo ime in priimek, telefon ali e-poštni
+          naslov ter sporočilo. Lokacija objekta je neobvezna. Brez zahtevanih
+          podatkov obrazca ni mogoče oddati; kontakt potrebujemo za odgovor.
+        </p>
+        <p>
+          Podatke uporabimo za obravnavo povpraševanja, pripravo ponudbe in
+          dogovor o ogledu ali storitvi. Pravna podlaga so ukrepi pred
+          sklenitvijo pogodbe na vašo zahtevo oziroma izvajanje pogodbe.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="analitika">
+        <h2 id="analitika" class="font-display text-2xl font-black">
+          Spletna statistika
+        </h2>
+        <p>
+          Za statistiko spletne strani uporabljamo PostHog. Zajamejo se ogledi,
+          kliki, podatki o brskalniku in napravi ter uspešne oddaje obrazca brez
+          vsebine polj. Analitika ne uporablja piškotkov ali shrambe brskalnika
+          in ne snema sej.
+        </p>
+        <p>
+          Za približno štetje obiskovalcev PostHog na strežniku uporabi naslov
+          IP, podatke o brskalniku in domeno strani za izračun dnevnega
+          identifikatorja. Ta se vsak dan spremeni; obiskov iste osebe ne
+          povezujemo med dnevi. Pravna podlaga je naš zakoniti interes za
+          omejeno merjenje uporabe in izboljševanje strani.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="google">
+        <h2 id="google" class="font-display text-2xl font-black">
+          Google Business Profile in interna poročila
+        </h2>
+        <p>
+          <strong>Senčila Cuder Analytics</strong> je zasebna integracija za interna
+          poročila o našem poslovnem profilu v Googlu. Dostop odobri pooblaščeni skrbnik
+          prek Google OAuth.
+        </p>
+        <p>
+          Ko je povezava omogočena, uporabljamo identifikatorje poslovnega
+          računa in lokacije ter podatke o prikazih profila, klikih na telefon
+          in spletno stran, zahtevah za navodila za pot in iskalnih izrazih, ki
+          jih Google razkrije. Podatke uvozimo v PostHog za mesečne primerjave;
+          dostop imajo le pooblaščene osebe podjetja in skrbniki analitike.
+          Podatkov iz Googla ne prodajamo in jih ne uporabljamo za ciljno
+          oglaševanje.
+        </p>
+        <p>
+          Uporaba podatkov iz Googlovih API-jev in njihovo posredovanje drugim
+          aplikacijam v integraciji Senčila Cuder Analytics sta omejena na
+          opisane namene ter skladna s{" "}
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+          >
+            pravili Google API Services User Data Policy</a
+          >, vključno z zahtevami Limited Use.
+        </p>
+        <p>
+          Skrbnik lahko dostop prekliče v{" "}
+          <a href="https://myaccount.google.com/connections"
+            >povezavah Google računa</a
+          >. Preklic ustavi nadaljnji dostop do API-jev, ne izbriše pa samodejno
+          že uvoženih poročil. Za izbris nam pišite na zgornji e-poštni naslov.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="ponudniki">
+        <h2 id="ponudniki" class="font-display text-2xl font-black">
+          Ponudniki storitev
+        </h2>
+        <p>
+          <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a>{
+            " "
+          }
+          gosti stran in posreduje povpraševanja naši e-pošti; ponudniki e-pošte dostavljajo
+          in hranijo sporočila. <a href="https://posthog.com/privacy">PostHog</a
+          > obdeluje spletno statistiko.
+        </p>
+        <p>
+          PostHog podatke hrani v EU. Pri obdelavi zunaj Evropskega
+          gospodarskega prostora se opira na okvir EU–ZDA za varstvo podatkov
+          oziroma standardne pogodbene klavzule, Cloudflare pa na standardne
+          pogodbene klavzule. Podrobnosti o zaščitnih ukrepih so v{" "}
+          <a
+            href="https://posthog.com/privacy#international-transfer-of-personal-information"
+          >
+            pravilih PostHog</a
+          > in <a href="https://www.cloudflare.com/cloudflare-customer-dpa/">
+            pogodbi Cloudflare o obdelavi podatkov</a
+          >; kopijo ustreznih jamstev lahko zahtevate tudi pri nas.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="hramba">
+        <h2 id="hramba" class="font-display text-2xl font-black">
+          Hramba in izbris
+        </h2>
+        <p>
+          Povpraševanja hranimo, dokler so potrebna za odgovor, dogovor in
+          izvedbo storitve oziroma obravnavo morebitnih zahtevkov.
+          Dokumentacijo, za katero veljajo zakonski roki hrambe, hranimo skladno
+          s temi roki na podlagi zakonske obveznosti. Za obravnavo zahtevkov
+          podatke hranimo na podlagi zakonitega interesa varstva naših pravic.
+        </p>
+        <p>
+          Dogodke spletne analitike v PostHog hranimo eno leto. Uvožena Googlova
+          poročila hranimo za čas uporabe integracije oziroma do zahteve
+          skrbnika za izbris. Poverilnice OAuth varujemo in jih hranimo le za
+          delovanje povezave.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="pravice">
+        <h2 id="pravice" class="font-display text-2xl font-black">
+          Vaše pravice
+        </h2>
+        <p>
+          Zahtevate lahko dostop do svojih osebnih podatkov, popravek, izbris,
+          omejitev obdelave ali prenosljivost podatkov ter ugovarjate obdelavi
+          na podlagi zakonitega interesa. Pišite na <a href={CONTACT_EMAIL_LINK}
+            >{CONTACT_EMAIL}</a
+          >.
+        </p>
+        <p>
+          Pritožbo lahko vložite pri{" "}
+          <a href="https://www.ip-rs.si/"
+            >Informacijskem pooblaščencu Republike Slovenije</a
+          >.
+        </p>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</Page>
+
+<style>
+  section a {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+</style>
