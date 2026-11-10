@@ -1,0 +1,122 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_LINK,
+  SITE_TITLE,
+} from "@/const/names";
+import Page from "@/layouts/Page.astro";
+---
+
+<Page title={`Politika zasebnosti | ${SITE_TITLE}`}>
+  <Header />
+  <main id="main-content" class="px-5 py-12 md:px-12 md:py-20 xl:px-16">
+    <article class="mx-auto max-w-3xl space-y-10 leading-relaxed">
+      <header class="space-y-6 border-b border-ink/20 pb-10">
+        <a
+          class="inline-flex min-h-11 items-center gap-3 font-mono text-sm font-bold underline-offset-4 hover:underline"
+          href="/"
+        >
+          <ArrowLeft class="size-5" />
+          NAZAJ DOMOV
+        </a>
+        <h1
+          class="font-display text-4xl sm:text-5xl xl:text-6xl font-black leading-none tracking-tight uppercase"
+        >
+          POLITIKA ZASEBNOSTI
+        </h1>
+      </header>
+
+      <p>
+        Upravljavec je <strong>Senčila Cuder, Andrej Cuder s.p.</strong>,{" "}
+        {CONTACT_ADDRESS}, Slovenija. Kontakt za varstvo podatkov:{" "}
+        <a href={CONTACT_EMAIL_LINK}>{CONTACT_EMAIL}</a>.
+      </p>
+
+      <section class="space-y-4" aria-labelledby="povprasevanja">
+        <h2 id="povprasevanja" class="font-display text-2xl font-black">
+          Povpraševanja
+        </h2>
+        <p>
+          Ime, telefon ali e-pošto, sporočilo in neobvezno lokacijo obdelujemo
+          za odgovor in izvedbo storitve na podlagi ukrepov pred sklenitvijo
+          oziroma izvajanja pogodbe. Brez obveznih podatkov obrazca ni mogoče
+          oddati. Podatke hranimo do zaključka obravnave oziroma storitve, dlje
+          pa zaradi zakonskih obveznosti ali zakonitega interesa uveljavljanja
+          pravic, do izteka ustreznih zakonskih rokov.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="analitika">
+        <h2 id="analitika" class="font-display text-2xl font-black">
+          Spletna statistika
+        </h2>
+        <p>
+          PostHog beleži oglede, klike, dogodke oddaje obrazca ter
+          podatke o brskalniku in napravi. Naslov IP uporabi za dnevno štetje
+          obiskovalcev. Podlaga je
+          zakoniti interes izboljševanja strani; dogodke hranimo eno leto.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="google">
+        <h2 id="google" class="font-display text-2xl font-black">
+          Google Business Profile
+        </h2>
+        <p>
+          Senčila Cuder Analytics z dovoljenjem skrbnika uvozi identifikatorje
+          poslovnega računa in lokacije ter statistiko prikazov, klikov, navodil
+          za pot in iskanj iz Google Business Profile v PostHog za interna
+          poročila. Dostop imajo le pooblaščene osebe.
+        </p>
+        <p>
+          Poročila hranimo največ do prenehanja uporabe integracije; izbris
+          lahko prej zahtevate po e-pošti.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="ponudniki">
+        <h2 id="ponudniki" class="font-display text-2xl font-black">
+          Ponudniki in prenosi
+        </h2>
+        <p>
+          Cloudflare obdeluje naslov IP za gostovanje in varnost strani
+          (zakoniti interes) ter posreduje povpraševanja, Gmail hrani e-pošto,
+          PostHog pa statistiko in poročila. Nam dostopni varnostni zapisi
+          Cloudflare se hranijo največ 31 dni. Pri prenosih zunaj EGP se ponudniki
+          opirajo na okvir EU–ZDA za varstvo podatkov ali standardne pogodbene
+          klavzule. Kopijo jamstev dobite na zahtevo.
+        </p>
+      </section>
+
+      <section class="space-y-4" aria-labelledby="pravice">
+        <h2 id="pravice" class="font-display text-2xl font-black">
+          Vaše pravice
+        </h2>
+        <p>
+          Zahtevate lahko dostop, popravek, izbris, omejitev ali prenosljivost
+          podatkov.
+        </p>
+        <p>
+          Obdelavi na podlagi zakonitega interesa lahko kadar koli ugovarjate.
+        </p>
+        <p>
+          Pritožbo lahko vložite pri{" "}
+          <a href="https://www.ip-rs.si/">Informacijskem pooblaščencu</a>.
+        </p>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</Page>
+
+<style>
+  article > p a,
+  section a {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+</style>
