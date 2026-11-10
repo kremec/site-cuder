@@ -28,11 +28,6 @@ import Page from "@/layouts/Page.astro";
         >
           POLITIKA ZASEBNOSTI
         </h1>
-        <p class="text-sm">
-          Zadnja posodobitev: <time datetime="2026-11-10"
-            >10. november 2026</time
-          >
-        </p>
       </header>
 
       <p>
@@ -60,9 +55,9 @@ import Page from "@/layouts/Page.astro";
           Spletna statistika
         </h2>
         <p>
-          PostHog beleži oglede, klike, oddaje obrazca brez vsebine polj ter
+          PostHog beleži oglede, klike, dogodke oddaje obrazca ter
           podatke o brskalniku in napravi. Naslov IP uporabi za dnevno štetje
-          obiskovalcev. Piškotkov in snemanja sej ne uporablja. Podlaga je
+          obiskovalcev. Podlaga je
           zakoniti interes izboljševanja strani; dogodke hranimo eno leto.
         </p>
       </section>
@@ -75,19 +70,11 @@ import Page from "@/layouts/Page.astro";
           Senčila Cuder Analytics z dovoljenjem skrbnika uvozi identifikatorje
           poslovnega računa in lokacije ter statistiko prikazov, klikov, navodil
           za pot in iskanj iz Google Business Profile v PostHog za interna
-          poročila. Dostop imajo le pooblaščene osebe. Uporaba in posredovanje
-          teh podatkov sta skladna s{" "}
-          <a
-            href="https://developers.google.com/terms/api-services-user-data-policy"
-          >
-            pravili Google API Services User Data Policy</a
-          >, vključno z zahtevami Limited Use.
+          poročila. Dostop imajo le pooblaščene osebe.
         </p>
         <p>
-          Poročila hranimo največ do prenehanja uporabe integracije ali zahteve
-          za izbris. Skrbnik lahko dostop prekliče v{" "}
-          <a href="https://myaccount.google.com/connections">Google računu</a>;
-          za izbris že uvoženih podatkov nam pišite.
+          Poročila hranimo največ do prenehanja uporabe integracije; izbris
+          lahko prej zahtevate po e-pošti.
         </p>
       </section>
 
@@ -98,7 +85,8 @@ import Page from "@/layouts/Page.astro";
         <p>
           Cloudflare obdeluje naslov IP za gostovanje in varnost strani
           (zakoniti interes) ter posreduje povpraševanja, Gmail hrani e-pošto,
-          PostHog pa statistiko in poročila. Pri prenosih zunaj EGP se ponudniki
+          PostHog pa statistiko in poročila. Nam dostopni varnostni zapisi
+          Cloudflare se hranijo največ 31 dni. Pri prenosih zunaj EGP se ponudniki
           opirajo na okvir EU–ZDA za varstvo podatkov ali standardne pogodbene
           klavzule. Kopijo jamstev dobite na zahtevo.
         </p>
@@ -116,8 +104,7 @@ import Page from "@/layouts/Page.astro";
           Obdelavi na podlagi zakonitega interesa lahko kadar koli ugovarjate.
         </p>
         <p>
-          Pišite na <a href={CONTACT_EMAIL_LINK}>{CONTACT_EMAIL}</a>. Pritožbo
-          lahko vložite pri{" "}
+          Pritožbo lahko vložite pri{" "}
           <a href="https://www.ip-rs.si/">Informacijskem pooblaščencu</a>.
         </p>
       </section>
