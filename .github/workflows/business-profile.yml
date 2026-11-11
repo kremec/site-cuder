@@ -1,0 +1,36 @@
+name: Sync Google Business Profile
+
+on:
+  schedule:
+    - cron: '23 7 * * *'
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Optional backfill start (YYYY-MM-DD); default: two previous months and this month'
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: business-profile-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - run: node --test scripts/sync-business-profile.test.mjs
+      - run: node scripts/sync-business-profile.mjs
+        env:
+          GOOGLE_BUSINESS_PROFILE_CLIENT: ${{ secrets.GOOGLE_BUSINESS_PROFILE_CLIENT }}
+          GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN: ${{ secrets.GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN }}
+          GBP_LOCATION: ${{ vars.GBP_LOCATION }}
+          GBP_START_DATE: ${{ inputs.start_date }}
