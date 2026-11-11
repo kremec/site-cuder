@@ -13,6 +13,26 @@ To deploy the current branch manually after `bunx wrangler login`, run
 Previews intentionally omit production email and queue bindings. The pages work,
 but submitting the contact form returns an error and does not send an email.
 
+## Business Profile analytics
+
+The `Sync Google Business Profile` GitHub Actions workflow imports performance
+data into PostHog daily at 07:23 UTC. It reads Google data; it never edits listings.
+Repository secrets `GOOGLE_BUSINESS_PROFILE_CLIENT` (downloaded Desktop client
+JSON) and `GOOGLE_BUSINESS_PROFILE_REFRESH_TOKEN` authorize it. Repository variable
+`GBP_LOCATION` selects the business (`locations/<id>`).
+
+Each run refreshes the two previous calendar months and the current month;
+**Run workflow → start_date** allows an earlier backfill. Google search terms are
+imported for completed months, including privacy thresholds. Snapshot queries in
+`scripts/business-profile-*.sql` select the latest data per date/month, so reruns
+and corrected figures do not inflate totals. They follow the dashboard's selected
+calendar month. Views sum Google's daily device/platform counts, not unique
+monthly people; button clicks do not prove calls, visits or sales.
+
+GitHub disables schedules in public repositories after 60 days without repository
+activity. Re-enable this workflow under Actions if that happens; a backfill can
+recover the missed period.
+
 ```sh
 bun create astro@latest -- --template minimal
 ```
